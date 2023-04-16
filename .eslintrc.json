@@ -6,11 +6,11 @@
         "node": true
     },
     "extends": ["airbnb-base", "prettier"],
-    "overrides": [
-    ],
+    "overrides": [],
     "parserOptions": {
         "ecmaVersion": "latest"
     },
     "rules": {
+        "no-underscore-dangle": "off"
     }
 }
