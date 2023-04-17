@@ -7,11 +7,13 @@ const GameSchema = new Schema({
     price: { type: Number, required: true, min: 1 },
     quantity: { type: Number, required: true, min: 1, max: 1000 },
     synopsis: { type: String, maxLength: 1000 },
-    consoles: {
-        type: [Schema.Types.ObjectId],
-        ref: 'Consoles',
-        required: true,
-    },
+    availableConsoles: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Consoles',
+            required: true,
+        },
+    ],
 });
 
 GameSchema.virtual('url').get(function () {
