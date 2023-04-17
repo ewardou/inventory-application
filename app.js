@@ -8,7 +8,8 @@ const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const gamesRouter = require('./routes/gamesRoute');
+const consolesRouter = require('./routes/consolesRoute');
 
 const app = express();
 require('dotenv').config();
@@ -30,7 +31,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use(gamesRouter);
+app.use(consolesRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
