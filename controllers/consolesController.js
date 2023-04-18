@@ -18,3 +18,18 @@ exports.getConsoleDetails = asyncHandler(async (req, res) => {
 exports.createConsole = (req, res) => {
     res.render('console_form');
 };
+
+exports.updateConsole = asyncHandler(async (req, res) => {
+    const gameConsole = await Consoles.findById(req.params.id).exec();
+    res.render('console_form', { console: gameConsole });
+});
+
+exports.deleteConsole = asyncHandler(async (req, res) => {
+    const games = await Games.find({ availableConsoles: req.params.id }).exec();
+    if (games.length <= 0) {
+        await Consoles.findByIdAndRemove(req.params.id);
+        res.redirect('/consoles');
+    } else {
+        res.render('console_delete', { games });
+    }
+});
