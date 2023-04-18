@@ -7,19 +7,17 @@
         <title>Games</title>
     </head>
     <body>
-        <h1><%= title %></h1>
-        <% allGames.forEach(item=>{ %>
-        <a href="<%=item.url %>"><%= item.name %></a>
-        <p>Price: <%= item.price %></p>
-        <p>Quantity: <%= item.quantity %></p>
-        <% if (item.synopsis) { %>
-        <p>Synopsis: <%= item.synopsis %></p>
+        <h1><%= game._id %></h1>
+        <p>Name: <%= game.name %></p>
+        <p>Price: <%= game.price %></p>
+        <p>Quantity: <%= game.quantity %></p>
+        <% if (game.synopsis) { %>
+        <p>Synopsis: <%= game.synopsis %></p>
         <% } %>
         <ul>
-            <% item.availableConsoles.forEach(console => { %>
+            <% game.availableConsoles.forEach(console => { %>
             <li><%=console.name%></li>
             <% }) %>
         </ul>
-        <% }) %>
     </body>
 </html>

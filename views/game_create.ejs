@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Add new game</title>
+    </head>
+    <body>
+        <h1>Add new game to the listing</h1>
+        <form action="" method="post">
+            <p>
+                <label for="name">Game title: </label>
+                <input
+                    type="text"
+                    id="name"
+                    name="npriceame"
+                    required
+                    minlength="1"
+                    maxlength="100"
+                />
+            </p>
+            <p>
+                <label for="price">Price: </label>
+                <input type="number" id="price" name="price" required min="1" />
+            </p>
+            <p>
+                <label for="quantity">Quantity: </label>
+                <input
+                    type="number"
+                    id="quantity"
+                    name="quantity"
+                    required
+                    min="1"
+                    max="1000"
+                />
+            </p>
+            <p>
+                <label for="synopsis">synopsis</label>
+                <textarea
+                    name="synopsis"
+                    id="synopsis"
+                    cols="30"
+                    rows="10"
+                    maxlength="1000"
+                ></textarea>
+            </p>
+            <fieldset>
+                <legend>Available platforms</legend>
+                <p>
+                    <input
+                        type="checkbox"
+                        id="switch"
+                        value="switch"
+                        name="availableConsoles"
+                    />
+                    <label for="switch">Nintendo Switch</label>
+                </p>
+                <p>
+                    <input
+                        type="checkbox"
+                        id="xbox"
+                        value="xbox"
+                        name="availableConsoles"
+                    />
+                    <label for="xbox">Xbox Series X</label>
+                </p>
+                <p>
+                    <input
+                        type="checkbox"
+                        id="playstation"
+                        value="playstation"
+                        name="availableConsoles"
+                    />
+                    <label for="playstation">Playstation 5</label>
+                </p>
+            </fieldset>
+            <button type="submit">Submit</button>
+        </form>
+    </body>
+</html>
