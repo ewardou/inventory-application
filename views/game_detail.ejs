@@ -19,5 +19,9 @@
             <li><%=console.name%></li>
             <% }) %>
         </ul>
+        <p><a href="<%= game.url %>/update">Update game</a></p>
+        <form action="<%= game.url %>/delete" method="post">
+            <button type="submit">Delete game</button>
+        </form>
     </body>
 </html>
