@@ -38,24 +38,14 @@
             </p>
             <fieldset>
                 <legend>Available platforms</legend>
+                <% consoles.forEach(console=>{%>
                 <p>
-                    <input type="checkbox" id="switch" value="switch"
-                    name="availableConsoles" <%= checked.nintendo ? "checked" :
-                    "" %> />
-                    <label for="switch">Nintendo Switch</label>
+                    <input type="checkbox" id="<%= console._id %>" value="<%=
+                    console.name %>" name="availableConsoles" <%=
+                    console.checked ? "checked" : "" %> />
+                    <label for="<%= console._id %>"><%= console.name %></label>
                 </p>
-                <p>
-                    <input type="checkbox" id="xbox" value="xbox"
-                    name="availableConsoles" <%= checked.xbox ? "checked" : ""
-                    %> />
-                    <label for="xbox">Xbox Series X</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="playstation" value="playstation"
-                    name="availableConsoles" <%= checked.playstation ? "checked"
-                    : "" %> />
-                    <label for="playstation">Playstation 5</label>
-                </p>
+                <% }) %>
             </fieldset>
             <button type="submit">Submit</button>
         </form>
