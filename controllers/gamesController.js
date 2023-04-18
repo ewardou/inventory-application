@@ -14,7 +14,7 @@ exports.getGameDetails = asyncHandler(async (req, res) => {
 });
 
 exports.createGame = (req, res) => {
-    res.render('game_create');
+    res.render('game_form');
 };
 
 exports.updateGame = asyncHandler(async (req, res) => {
@@ -33,7 +33,7 @@ exports.updateGame = asyncHandler(async (req, res) => {
             }
         });
     });
-    res.render('game_create', { game, checked });
+    res.render('game_form', { game, checked });
 });
 
 exports.deleteGame = asyncHandler(async (req, res) => {

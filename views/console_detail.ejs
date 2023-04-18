@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= console.name %></title>
+    </head>
+    <body>
+        <h1><%= console._id %></h1>
+        <p>Name: <%= console.name %></p>
+        <p>Price: <%= console.price %></p>
+        <p>Quantity: <%= console.quantity %></p>
+        <p>Manufacturer: <%= console.manufacturer %></p>
+        <ul>
+            <% availableGames.forEach(game => { %>
+            <li><%=game.name%></li>
+            <% }) %>
+        </ul>
+        <p><a href="<%= console.url %>/update">Update console</a></p>
+        <form action="<%= console.url %>/delete" method="post">
+            <button type="submit">Delete console</button>
+        </form>
+    </body>
+</html>

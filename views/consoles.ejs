@@ -9,7 +9,7 @@
     <body>
         <h1><%= title %></h1>
         <% allConsoles.forEach(item=>{ %>
-        <p>Name: <%= item.name %></p>
+        <p>Name: <a href="<%= item.url %>"><%= item.name %></a></p>
         <p>Manufacturer: <%= item.manufacturer %></p>
         <p>Price: <%= item.price %></p>
         <p>Quantity: <%= item.quantity %></p>
