@@ -25,11 +25,14 @@
                 min="1" value="<%= console ? console.quantity : ""%>" />
             </p>
             <p>
-                <label for="name">Manufacturer: </label>
-                <input type="text" id="name" name="name" required minlength="1"
-                maxlength="100" value="<%= console ? console.manufacturer :
-                ""%>" />
+                <label for="manufacturer">Manufacturer: </label>
+                <input type="text" id="manufacturer" name="manufacturer"
+                required minlength="1" maxlength="100" value="<%= console ?
+                console.manufacturer : ""%>" />
             </p>
+            <% if (errors) { errors.forEach(error=>{%>
+            <p><%= error.msg %></p>
+            <% })} %>
             <button type="submit">Submit</button>
         </form>
     </body>
