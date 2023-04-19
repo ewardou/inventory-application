@@ -11,7 +11,6 @@ const GameSchema = new Schema({
         {
             type: Schema.Types.ObjectId,
             ref: 'Consoles',
-            required: true,
         },
     ],
 });

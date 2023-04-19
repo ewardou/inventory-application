@@ -41,12 +41,15 @@
                 <% consoles.forEach(console=>{%>
                 <p>
                     <input type="checkbox" id="<%= console._id %>" value="<%=
-                    console.name %>" name="availableConsoles" <%=
-                    console.checked ? "checked" : "" %> />
+                    console._id %>" name="availableConsoles" <%= console.checked
+                    ? "checked" : "" %> />
                     <label for="<%= console._id %>"><%= console.name %></label>
                 </p>
                 <% }) %>
             </fieldset>
+            <% if (errors) { errors.forEach(error=>{%>
+            <p><%= error.msg %></p>
+            <% })} %>
             <button type="submit">Submit</button>
         </form>
     </body>
