@@ -10,6 +10,7 @@ mongoose.set('strictQuery', false);
 const indexRouter = require('./routes/index');
 const gamesRouter = require('./routes/gamesRoute');
 const consolesRouter = require('./routes/consolesRoute');
+const accessoriesRouter = require('./routes/accessoriesRoute');
 
 const app = express();
 require('dotenv').config();
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use(gamesRouter);
 app.use(consolesRouter);
+app.use(accessoriesRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
