@@ -59,3 +59,8 @@ exports.createAccessory_Post = [
         }
     }),
 ];
+
+exports.deleteAccessory = asyncHandler(async (req, res) => {
+    await Accessories.findByIdAndRemove(req.params.id);
+    res.redirect('/accessories');
+});
