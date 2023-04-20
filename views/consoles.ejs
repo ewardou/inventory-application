@@ -13,6 +13,8 @@
         <p>Manufacturer: <%= item.manufacturer %></p>
         <p>Price: <%= item.price %></p>
         <p>Quantity: <%= item.quantity %></p>
-        <% }) %>
+        <% }) %> <% if (allConsoles<=0){%>
+        <p>No consoles available right now.</p>
+        <% } %>
     </body>
 </html>

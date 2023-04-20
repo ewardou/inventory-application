@@ -20,6 +20,8 @@
             <li><%=console.name%></li>
             <% }) %>
         </ul>
-        <% }) %>
+        <% }) %> <% if(allGames.length<=0){%>
+        <p>No items available at the moment.</p>
+        <% } %>
     </body>
 </html>

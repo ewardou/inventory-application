@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
 const Consoles = require('../models/consoles');
 const Games = require('../models/games');
+const Accessories = require('../models/accessories');
 
 exports.getConsoles = asyncHandler(async (req, res) => {
     const allConsoles = await Consoles.find().exec();
@@ -79,11 +80,14 @@ exports.updateConsole_Post = [
 ];
 
 exports.deleteConsole = asyncHandler(async (req, res) => {
-    const games = await Games.find({ availableConsoles: req.params.id }).exec();
-    if (games.length <= 0) {
+    const [games, accessories] = await Promise.all([
+        Games.find({ availableConsoles: req.params.id }).exec(),
+        Accessories.find({ availableConsoles: req.params.id }).exec(),
+    ]);
+    if (games.length <= 0 && accessories.length <= 0) {
         await Consoles.findByIdAndRemove(req.params.id);
         res.redirect('/consoles');
     } else {
-        res.render('console_delete', { games });
+        res.render('console_delete', { games, accessories });
     }
 });

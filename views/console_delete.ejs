@@ -10,6 +10,8 @@
         <p>To delete this console you must first delete the following items:</p>
         <% games.forEach(game =>{ %>
         <p><a href="<%= game.url %>"><%= game.name %></a></p>
+        <% }) %> <% accessories.forEach(accessory =>{ %>
+        <p><a href="<%= accessory.url %>"><%= accessory.name %></a></p>
         <% }) %>
     </body>
 </html>

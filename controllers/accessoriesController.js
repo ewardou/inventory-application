@@ -60,6 +60,53 @@ exports.createAccessory_Post = [
     }),
 ];
 
+exports.updateAccessory = asyncHandler(async (req, res) => {
+    const [accessory, consoles] = await Promise.all([
+        Accessories.findById(req.params.id).exec(),
+        Consoles.find().exec(),
+    ]);
+    accessory.availableConsoles.forEach((availableConsole) => {
+        consoles.forEach((console) => {
+            if (console._id.toString() === availableConsole.toString()) {
+                console.checked = true;
+            }
+        });
+    });
+    res.render('accessory_form', { accessory, consoles, errors: null });
+});
+
+exports.updateAccessory_Post = [
+    body('price').trim().isInt({ min: 1 }).escape(),
+    body('quantity').trim().isInt({ min: 1 }).escape(),
+    body('name').trim().isLength({ min: 1, max: 100 }).escape(),
+    body('availableConsoles').optional().trim(),
+    asyncHandler(async (req, res) => {
+        const errors = validationResult(req);
+        const consoles = await Consoles.find({}).exec();
+        if (!req.body.availableConsoles) {
+            req.body.availableConsoles = consoles.map((console) => console._id);
+        }
+        const accessory = new Accessories({
+            name: req.body.name,
+            price: req.body.price,
+            quantity: req.body.quantity,
+            availableConsoles: req.body.availableConsoles,
+            _id: req.params.id,
+        });
+
+        if (!errors.isEmpty()) {
+            res.render('accessory_form', {
+                accessory,
+                consoles,
+                errors: errors.array(),
+            });
+        } else {
+            await Accessories.findByIdAndUpdate(req.params.id, accessory, {});
+            res.redirect('/accessories');
+        }
+    }),
+];
+
 exports.deleteAccessory = asyncHandler(async (req, res) => {
     await Accessories.findByIdAndRemove(req.params.id);
     res.redirect('/accessories');
