@@ -21,6 +21,7 @@ exports.createGame = asyncHandler(async (req, res) => {
         consoles: allConsoles,
         game: undefined,
         errors: null,
+        update: false,
     });
 });
 
@@ -45,7 +46,12 @@ exports.createGame_Post = [
         });
 
         if (!errors.isEmpty()) {
-            res.render('game_form', { game, consoles, errors: errors.array() });
+            res.render('game_form', {
+                game,
+                consoles,
+                errors: errors.array(),
+                update: false,
+            });
         } else {
             await game.save();
             res.redirect('/games');
@@ -65,7 +71,7 @@ exports.updateGame = asyncHandler(async (req, res) => {
             }
         });
     });
-    res.render('game_form', { game, consoles, errors: null });
+    res.render('game_form', { game, consoles, errors: null, update: true });
 });
 
 exports.updateGame_Post = [
@@ -90,7 +96,12 @@ exports.updateGame_Post = [
         });
 
         if (!errors.isEmpty()) {
-            res.render('game_form', { game, consoles, errors: errors.array() });
+            res.render('game_form', {
+                game,
+                consoles,
+                errors: errors.array(),
+                update: true,
+            });
         } else {
             await Games.findByIdAndUpdate(req.params.id, game, {});
             res.redirect('/games');

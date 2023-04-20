@@ -5,10 +5,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Add new game</title>
+        <script src="/javascripts/password.js" defer></script>
+        <link rel="stylesheet" href="/stylesheets/style.css" />
     </head>
     <body>
         <h1>Add new game to the listing</h1>
-        <form action="" method="post">
+        <form action="" method="post" id="form">
             <p>
                 <label for="name">Game title: </label>
                 <input type="text" id="name" name="name" required minlength="1"
@@ -49,8 +51,18 @@
             </fieldset>
             <% if (errors) { errors.forEach(error=>{%>
             <p><%= error.msg %></p>
-            <% })} %>
+            <% })} %> <% if(!update) {%>
             <button type="submit">Submit</button>
+            <% } %>
         </form>
+        <% if (update) {%>
+        <p><button class="confirm">Submit</button></p>
+        <div style="visibility: hidden" class="modal">
+            <label for="pwd">Introduce password</label>
+            <input type="password" id="pwd" />
+            <p></p>
+            <button form="form">Confirm</button>
+        </div>
+        <% } %>
     </body>
 </html>

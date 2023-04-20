@@ -26,6 +26,7 @@ exports.createAccessory = asyncHandler(async (req, res) => {
         consoles: allConsoles,
         accessory: undefined,
         errors: null,
+        update: false,
     });
 });
 
@@ -52,6 +53,7 @@ exports.createAccessory_Post = [
                 accessory,
                 consoles,
                 errors: errors.array(),
+                update: false,
             });
         } else {
             await accessory.save();
@@ -72,7 +74,12 @@ exports.updateAccessory = asyncHandler(async (req, res) => {
             }
         });
     });
-    res.render('accessory_form', { accessory, consoles, errors: null });
+    res.render('accessory_form', {
+        accessory,
+        consoles,
+        errors: null,
+        update: true,
+    });
 });
 
 exports.updateAccessory_Post = [
@@ -99,6 +106,7 @@ exports.updateAccessory_Post = [
                 accessory,
                 consoles,
                 errors: errors.array(),
+                update: true,
             });
         } else {
             await Accessories.findByIdAndUpdate(req.params.id, accessory, {});

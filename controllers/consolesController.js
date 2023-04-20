@@ -18,7 +18,7 @@ exports.getConsoleDetails = asyncHandler(async (req, res) => {
 });
 
 exports.createConsole = (req, res) => {
-    res.render('console_form', { errors: null });
+    res.render('console_form', { errors: null, update: false });
 };
 
 exports.createConsole_Post = [
@@ -39,6 +39,7 @@ exports.createConsole_Post = [
             res.render('console_form', {
                 console: gameConsole,
                 errors: errors.array(),
+                update: false,
             });
         } else {
             await gameConsole.save();
@@ -49,7 +50,11 @@ exports.createConsole_Post = [
 
 exports.updateConsole = asyncHandler(async (req, res) => {
     const gameConsole = await Consoles.findById(req.params.id).exec();
-    res.render('console_form', { console: gameConsole, errors: null });
+    res.render('console_form', {
+        console: gameConsole,
+        errors: null,
+        update: true,
+    });
 });
 
 exports.updateConsole_Post = [
@@ -71,6 +76,7 @@ exports.updateConsole_Post = [
             res.render('console_form', {
                 console: gameConsole,
                 errors: errors.array(),
+                update: true,
             });
         } else {
             await Consoles.findByIdAndUpdate(req.params.id, gameConsole, {});
