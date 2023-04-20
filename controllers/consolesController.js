@@ -10,11 +10,17 @@ exports.getConsoles = asyncHandler(async (req, res) => {
 });
 
 exports.getConsoleDetails = asyncHandler(async (req, res) => {
-    const [gameConsole, availableGames] = await Promise.all([
-        Consoles.findById(req.params.id).exec(),
-        Games.find({ availableConsoles: req.params.id }).exec(),
-    ]);
-    res.render('console_detail', { console: gameConsole, availableGames });
+    const [gameConsole, availableGames, availableAccessories] =
+        await Promise.all([
+            Consoles.findById(req.params.id).exec(),
+            Games.find({ availableConsoles: req.params.id }).exec(),
+            Accessories.find({ availableConsoles: req.params.id }).exec(),
+        ]);
+    res.render('console_detail', {
+        console: gameConsole,
+        availableGames,
+        availableAccessories,
+    });
 });
 
 exports.createConsole = (req, res) => {

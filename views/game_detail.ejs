@@ -5,6 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Item details</title>
+        <script src="/javascripts/password.js" defer></script>
+        <link rel="stylesheet" href="/stylesheets/style.css" />
     </head>
     <body>
         <h1><%= game._id %></h1>
@@ -20,8 +22,14 @@
             <% }) %>
         </ul>
         <p><a href="<%= game.url %>/update">Update item</a></p>
-        <form action="<%= game.url %>/delete" method="post">
-            <button type="submit">Delete item</button>
-        </form>
+        <p><button class="confirm">Delete item</button></p>
+        <div style="visibility: hidden" class="modal">
+            <form action="<%= game.url %>/delete" method="post">
+                <label for="pwd">Introduce password</label>
+                <input type="password" id="pwd" />
+                <p></p>
+                <button>Confirm</button>
+            </form>
+        </div>
     </body>
 </html>

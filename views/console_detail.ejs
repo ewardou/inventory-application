@@ -5,6 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title><%= console.name %></title>
+        <script src="/javascripts/password.js" defer></script>
+        <link rel="stylesheet" href="/stylesheets/style.css" />
     </head>
     <body>
         <h1><%= console._id %></h1>
@@ -12,14 +14,30 @@
         <p>Price: <%= console.price %></p>
         <p>Quantity: <%= console.quantity %></p>
         <p>Manufacturer: <%= console.manufacturer %></p>
+        <% if (availableGames.length>0) {%>
+        <p>Games available for this console:</p>
         <ul>
             <% availableGames.forEach(game => { %>
             <li><%=game.name%></li>
             <% }) %>
         </ul>
+        <% } %> <% if (availableAccessories.length>0) {%>
+        <p>Accessories available for this console:</p>
+        <ul>
+            <% availableAccessories.forEach(accessory => { %>
+            <li><%=accessory.name%></li>
+            <% }) %>
+        </ul>
+        <% } %>
         <p><a href="<%= console.url %>/update">Update console</a></p>
-        <form action="<%= console.url %>/delete" method="post">
-            <button type="submit">Delete console</button>
-        </form>
+        <p><button class="confirm">Delete Console</button></p>
+        <div style="visibility: hidden" class="modal">
+            <form action="<%= console.url %>/delete" method="post">
+                <label for="pwd">Introduce password</label>
+                <input type="password" id="pwd" />
+                <p></p>
+                <button>Confirm</button>
+            </form>
+        </div>
     </body>
 </html>
