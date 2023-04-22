@@ -7,6 +7,7 @@ const ConsoleSchema = new Schema({
     name: { type: String, maxLength: 100, required: true },
     price: { type: Number, required: true, min: 1 },
     quantity: { type: Number, required: true, min: 1 },
+    imageName: { type: String },
 });
 
 ConsoleSchema.virtual('url').get(function () {

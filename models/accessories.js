@@ -13,6 +13,7 @@ const AccessoriesSchema = new Schema({
             required: true,
         },
     ],
+    imageName: { type: String },
 });
 
 AccessoriesSchema.virtual('url').get(function () {

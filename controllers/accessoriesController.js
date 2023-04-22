@@ -1,7 +1,14 @@
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
+const multer = require('multer');
+const deleteImageFromFS = require('../public/javascripts/deleteImage');
 const Accessories = require('../models/accessories');
 const Consoles = require('../models/consoles');
+
+const upload = multer({
+    dest: './public/images',
+    limits: { fileSize: 1100000 },
+});
 
 exports.getAccessories = asyncHandler(async (req, res) => {
     const allAccessories = await Accessories.find()
@@ -31,6 +38,7 @@ exports.createAccessory = asyncHandler(async (req, res) => {
 });
 
 exports.createAccessory_Post = [
+    upload.single('article-image'),
     body('price').trim().isInt({ min: 1 }).escape(),
     body('quantity').trim().isInt({ min: 1 }).escape(),
     body('name').trim().isLength({ min: 1, max: 100 }).escape(),
@@ -41,11 +49,13 @@ exports.createAccessory_Post = [
         if (!req.body.availableConsoles) {
             req.body.availableConsoles = consoles.map((console) => console._id);
         }
+        const imageName = req.file ? req.file.filename : 'placeholder.png';
         const accessory = new Accessories({
             name: req.body.name,
             price: req.body.price,
             quantity: req.body.quantity,
             availableConsoles: req.body.availableConsoles,
+            imageName,
         });
 
         if (!errors.isEmpty()) {
@@ -83,20 +93,27 @@ exports.updateAccessory = asyncHandler(async (req, res) => {
 });
 
 exports.updateAccessory_Post = [
+    upload.single('article-image'),
     body('price').trim().isInt({ min: 1 }).escape(),
     body('quantity').trim().isInt({ min: 1 }).escape(),
     body('name').trim().isLength({ min: 1, max: 100 }).escape(),
     body('availableConsoles').optional().trim(),
     asyncHandler(async (req, res) => {
         const errors = validationResult(req);
+        let { imageName } = await Accessories.findById(req.params.id).exec();
         const consoles = await Consoles.find({}).exec();
         if (!req.body.availableConsoles) {
             req.body.availableConsoles = consoles.map((console) => console._id);
+        }
+        if (req.file) {
+            await deleteImageFromFS(imageName);
+            imageName = req.file.filename;
         }
         const accessory = new Accessories({
             name: req.body.name,
             price: req.body.price,
             quantity: req.body.quantity,
+            imageName,
             availableConsoles: req.body.availableConsoles,
             _id: req.params.id,
         });
@@ -116,6 +133,10 @@ exports.updateAccessory_Post = [
 ];
 
 exports.deleteAccessory = asyncHandler(async (req, res) => {
-    await Accessories.findByIdAndRemove(req.params.id);
+    const { imageName } = await Accessories.findById(req.params.id).exec();
+    await Promise.all([
+        Accessories.findByIdAndRemove(req.params.id),
+        deleteImageFromFS(imageName),
+    ]);
     res.redirect('/accessories');
 });

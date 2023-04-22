@@ -13,6 +13,7 @@ const GameSchema = new Schema({
             ref: 'Consoles',
         },
     ],
+    imageName: { type: String },
 });
 
 GameSchema.virtual('url').get(function () {
