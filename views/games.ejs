@@ -5,23 +5,44 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title><%= title %></title>
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <script src="/javascripts/controlAside.js" defer></script>
     </head>
     <body>
-        <h1><%= title %></h1>
-        <% allGames.forEach(item=>{ %>
-        <a href="<%=item.url %>"><%= item.name %></a>
-        <p>Price: <%= item.price %></p>
-        <p>Quantity: <%= item.quantity %></p>
-        <% if (item.synopsis) { %>
-        <p>Synopsis: <%= item.synopsis %></p>
-        <% } %>
-        <ul>
-            <% item.availableConsoles.forEach(console => { %>
-            <li><%=console.name%></li>
-            <% }) %>
-        </ul>
-        <% }) %> <% if(allGames.length<=0){%>
-        <p>No items available at the moment.</p>
-        <% } %>
+        <aside>
+            <button class="close-aside">&Cross;</button>
+            <a href="/games">Games</a>
+            <a href="/consoles">Consoles</a>
+            <a href="/accessories">Accessories</a>
+        </aside>
+        <main>
+            <button class="hamburger">&#9776;</button>
+            <h1><%= title %></h1>
+            <a
+                href="<%= title.includes('games') ? 'games' : 'accessories'%>/create"
+                class="new-entry"
+                >New entry</a
+            >
+            <% allGames.forEach(item=>{ %>
+            <a href="<%=item.url %>" class="card">
+                <div>
+                    <p><strong><%= item.name %></strong></p>
+                    <p>Price: <%= item.price %> USD</p>
+                    <p>Quantity: <%= item.quantity %></p>
+                    <ul>
+                        <% item.availableConsoles.forEach(console => { %>
+                        <li><%=console.name%></li>
+                        <% }) %>
+                    </ul>
+                </div>
+                <img
+                    src="/images/<%= item.imageName %>"
+                    alt="<%= item.name %>"
+                />
+            </a>
+            <% }) %> <% if(allGames.length<=0){%>
+            <p>No items available at the moment.</p>
+            <% } %>
+        </main>
     </body>
 </html>

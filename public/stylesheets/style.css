@@ -1,8 +1,188 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
 }
 
-a {
-  color: #00B7FF;
+body > aside:first-of-type {
+    background-color: rgb(196, 37, 37);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+}
+aside a {
+    color: whitesmoke;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a,
+p,
+li,
+legend,
+button {
+    font-size: 1.2rem;
+}
+.card {
+    color: black;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #333;
+    padding: 15px;
+    transition: background-color 150ms ease-in;
+}
+main {
+    padding: 15px;
+}
+.card img {
+    width: 150px;
+    height: auto;
+}
+.card:hover {
+    background-color: lightblue;
+}
+.card > div > * {
+    margin-bottom: 5px;
+}
+ul {
+    display: flex;
+    list-style: none;
+    gap: 8px;
+}
+ul li {
+    background-color: lightblue;
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.details img {
+    width: 300px;
+    height: auto;
+    margin: 0 auto;
+}
+.details .buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.details .buttons > * {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid #333;
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.details .buttons > button {
+    background-color: rgb(248, 63, 63);
+}
+.details .buttons > a {
+    background-color: rgb(119, 119, 247);
+}
+.modal {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    background-color: whitesmoke;
+    padding: 25px;
+}
+
+.modal .close-modal {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}
+.modal button:nth-of-type(2) {
+    margin: 0 auto;
+    display: block;
+    margin-top: 20px;
+}
+
+.new-entry {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: black;
+    background-color: whitesmoke;
+    text-decoration: none;
+    padding: 3px;
+    border: 1px solid #333;
+    font-weight: bold;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+form p {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin: 10px 0;
+    flex-wrap: wrap;
+}
+form p input[type='text'],
+textarea {
+    width: 60%;
+    max-width: 300px;
+    resize: none;
+}
+fieldset {
+    width: 80%;
+}
+input,
+textarea {
+    padding: 3px;
+}
+
+.close-aside,
+.hamburger {
+    display: none;
+}
+@media (max-width: 620px) {
+    .card {
+        flex-direction: column;
+    }
+}
+@media (max-width: 500px) {
+    .close-aside,
+    .hamburger {
+        display: block;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+    aside {
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: translateX(-500px);
+    }
+    aside.visible {
+        transform: translateX(0px);
+    }
+    body {
+        display: flex;
+        flex-direction: column;
+    }
 }

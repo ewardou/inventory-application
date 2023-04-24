@@ -6,31 +6,52 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Item details</title>
         <script src="/javascripts/password.js" defer></script>
+        <script src="/javascripts/controlAside.js" defer></script>
         <link rel="stylesheet" href="/stylesheets/style.css" />
     </head>
     <body>
-        <h1><%= game._id %></h1>
-        <p>Name: <%= game.name %></p>
-        <p>Price: <%= game.price %></p>
-        <p>Quantity: <%= game.quantity %></p>
-        <% if (game.synopsis) { %>
-        <p>Synopsis: <%= game.synopsis %></p>
-        <% } %>
-        <ul>
-            <% game.availableConsoles.forEach(console => { %>
-            <li><%=console.name%></li>
-            <% }) %>
-        </ul>
-        <img src="/images/<%= game.imageName %>" alt="<%= game.name %>" />
-        <p><a href="<%= game.url %>/update">Update item</a></p>
-        <p><button class="confirm">Delete item</button></p>
-        <div style="visibility: hidden" class="modal">
-            <form action="<%= game.url %>/delete" method="post">
-                <label for="pwd">Introduce password</label>
-                <input type="password" id="pwd" />
-                <p></p>
-                <button>Confirm</button>
-            </form>
-        </div>
+        <aside>
+            <button class="close-aside">&Cross;</button>
+            <a href="/games">Games</a>
+            <a href="/consoles">Consoles</a>
+            <a href="/accessories">Accessories</a>
+        </aside>
+        <main>
+            <button class="hamburger">&#9776;</button>
+            <div class="details">
+                <h1>ID: <%= game._id %></h1>
+                <p>Name: <%= game.name %></p>
+                <p>Price: <%= game.price %></p>
+                <p>Quantity: <%= game.quantity %></p>
+                <% if (game.synopsis) { %>
+                <p>Synopsis: <%= game.synopsis %></p>
+                <% } %>
+                <p>Platforms:</p>
+                <ul>
+                    <% game.availableConsoles.forEach(console => { %>
+                    <li><%=console.name%></li>
+                    <% }) %>
+                </ul>
+                <img
+                    src="/images/<%= game.imageName %>"
+                    alt="<%= game.name %>"
+                />
+                <div class="buttons">
+                    <a href="<%= game.url %>/update">Update item</a>
+                    <button class="confirm">Delete item</button>
+                </div>
+                <div style="visibility: hidden" class="modal">
+                    <form action="<%= game.url %>/delete" method="post">
+                        <button type="button" class="close-modal">
+                            &Cross;
+                        </button>
+                        <label for="pwd">Introduce password</label>
+                        <input type="password" id="pwd" />
+                        <p></p>
+                        <button>Confirm</button>
+                    </form>
+                </div>
+            </div>
+        </main>
     </body>
 </html>

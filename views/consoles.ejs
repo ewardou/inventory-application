@@ -5,16 +5,36 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Consoles</title>
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <script src="/javascripts/controlAside.js" defer></script>
     </head>
     <body>
-        <h1><%= title %></h1>
-        <% allConsoles.forEach(item=>{ %>
-        <p>Name: <a href="<%= item.url %>"><%= item.name %></a></p>
-        <p>Manufacturer: <%= item.manufacturer %></p>
-        <p>Price: <%= item.price %></p>
-        <p>Quantity: <%= item.quantity %></p>
-        <% }) %> <% if (allConsoles<=0){%>
-        <p>No consoles available right now.</p>
-        <% } %>
+        <aside>
+            <button class="close-aside">&Cross;</button>
+            <a href="/games">Games</a>
+            <a href="/consoles">Consoles</a>
+            <a href="/accessories">Accessories</a>
+        </aside>
+        <main>
+            <button class="hamburger">&#9776;</button>
+            <h1><%= title %></h1>
+            <a href="consoles/create" class="new-entry">New entry</a>
+            <% allConsoles.forEach(item=>{ %>
+            <a href="<%= item.url %>" class="card">
+                <div>
+                    <p><strong><%= item.name %></strong></p>
+                    <p>Manufacturer: <%= item.manufacturer %></p>
+                    <p>Price: <%= item.price %> USD</p>
+                    <p><%= item.quantity %> units available</p>
+                </div>
+                <img
+                    src="/images/<%= item.imageName %>"
+                    alt="<%= item.name %>"
+                />
+            </a>
+            <% }) %> <% if (allConsoles<=0){%>
+            <p>No consoles available right now.</p>
+            <% } %>
+        </main>
     </body>
 </html>

@@ -5,13 +5,27 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Delete console</title>
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <script src="/javascripts/controlAside.js" defer></script>
     </head>
     <body>
-        <p>To delete this console you must first delete the following items:</p>
-        <% games.forEach(game =>{ %>
-        <p><a href="<%= game.url %>"><%= game.name %></a></p>
-        <% }) %> <% accessories.forEach(accessory =>{ %>
-        <p><a href="<%= accessory.url %>"><%= accessory.name %></a></p>
-        <% }) %>
+        <aside>
+            <button class="close-aside">&Cross;</button>
+            <a href="/games">Games</a>
+            <a href="/consoles">Consoles</a>
+            <a href="/accessories">Accessories</a>
+        </aside>
+        <main>
+            <button class="hamburger">&#9776;</button>
+            <p>
+                To delete this console you must first delete the following
+                items:
+            </p>
+            <% games.forEach(game =>{ %>
+            <p><a href="<%= game.url %>"><%= game.name %></a></p>
+            <% }) %> <% accessories.forEach(accessory =>{ %>
+            <p><a href="<%= accessory.url %>"><%= accessory.name %></a></p>
+            <% }) %>
+        </main>
     </body>
 </html>

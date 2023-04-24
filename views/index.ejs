@@ -5,10 +5,23 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Home</title>
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <script src="/javascripts/controlAside.js" defer></script>
     </head>
     <body>
-        <a href="/games">Games</a>
-        <a href="/consoles">Consoles</a>
-        <a href="/accessories">Accessories</a>
+        <aside>
+            <button class="close-aside">&Cross;</button>
+            <a href="/games">Games</a>
+            <a href="/consoles">Consoles</a>
+            <a href="/accessories">Accessories</a>
+        </aside>
+        <main>
+            <button class="hamburger">&#9776;</button>
+            <h1>Inventory app</h1>
+            <p>We currently have this many items in our inventory</p>
+            <p><%= consolesCount %> consoles</p>
+            <p><%= gamesCount %> games</p>
+            <p><%= accessoriesCount %> accessories</p>
+        </main>
     </body>
 </html>

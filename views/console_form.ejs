@@ -6,55 +6,76 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Add new console</title>
         <script src="/javascripts/password.js" defer></script>
+        <script src="/javascripts/controlAside.js" defer></script>
         <link rel="stylesheet" href="/stylesheets/style.css" />
     </head>
     <body>
-        <h1>Add new console to the listing</h1>
-        <form action="" method="post" id="form" enctype="multipart/form-data">
+        <aside>
+            <button class="close-aside">&Cross;</button>
+            <a href="/games">Games</a>
+            <a href="/consoles">Consoles</a>
+            <a href="/accessories">Accessories</a>
+        </aside>
+        <main>
+            <button class="hamburger">&#9776;</button>
+            <h1>Add new console to the listing</h1>
+            <form
+                action=""
+                method="post"
+                id="form"
+                enctype="multipart/form-data"
+            >
+                <p>
+                    <label for="name">Name of the console: </label>
+                    <input type="text" id="name" name="name" required
+                    minlength="1" maxlength="100" value="<%= console ?
+                    console.name : ""%>" />
+                </p>
+                <p>
+                    <label for="price">Price: </label>
+                    <input type="number" id="price" name="price" required
+                    min="1" value="<%= console ? console.price : ""%>"/>
+                </p>
+                <p>
+                    <label for="quantity">Quantity: </label>
+                    <input type="number" id="quantity" name="quantity" required
+                    min="1" value="<%= console ? console.quantity : ""%>" />
+                </p>
+                <p>
+                    <label for="manufacturer">Manufacturer: </label>
+                    <input type="text" id="manufacturer" name="manufacturer"
+                    required minlength="1" maxlength="100" value="<%= console ?
+                    console.manufacturer : ""%>" />
+                </p>
+                <p>
+                    <label for="image">Article's image: </label>
+                    <input
+                        type="file"
+                        id="image"
+                        name="article-image"
+                        accept="image/*"
+                    />
+                </p>
+                <% if (errors) { errors.forEach(error=>{%>
+                <p><%= error.msg %></p>
+                <% })} %> <% if(!update) {%>
+                <button type="submit">Submit</button>
+                <% } %>
+            </form>
+            <% if (update) {%>
             <p>
-                <label for="name">Name of the console: </label>
-                <input type="text" id="name" name="name" required minlength="1"
-                maxlength="100" value="<%= console ? console.name : ""%>" />
+                <button class="confirm" style="margin: 0 auto; display: block">
+                    Submit
+                </button>
             </p>
-            <p>
-                <label for="price">Price: </label>
-                <input type="number" id="price" name="price" required min="1"
-                value="<%= console ? console.price : ""%>"/>
-            </p>
-            <p>
-                <label for="quantity">Quantity: </label>
-                <input type="number" id="quantity" name="quantity" required
-                min="1" value="<%= console ? console.quantity : ""%>" />
-            </p>
-            <p>
-                <label for="manufacturer">Manufacturer: </label>
-                <input type="text" id="manufacturer" name="manufacturer"
-                required minlength="1" maxlength="100" value="<%= console ?
-                console.manufacturer : ""%>" />
-            </p>
-            <p>
-                <label for="image">Article's image: </label>
-                <input
-                    type="file"
-                    id="image"
-                    name="article-image"
-                    accept="image/*"
-                />
-            </p>
-            <% if (errors) { errors.forEach(error=>{%>
-            <p><%= error.msg %></p>
-            <% })} %> <% if(!update) {%>
-            <button type="submit">Submit</button>
+            <div style="visibility: hidden" class="modal">
+                <button type="button" class="close-modal">&Cross;</button>
+                <label for="pwd">Introduce password</label>
+                <input type="password" id="pwd" />
+                <p></p>
+                <button form="form">Confirm</button>
+            </div>
             <% } %>
-        </form>
-        <% if (update) {%>
-        <p><button class="confirm">Submit</button></p>
-        <div style="visibility: hidden" class="modal">
-            <label for="pwd">Introduce password</label>
-            <input type="password" id="pwd" />
-            <p></p>
-            <button form="form">Confirm</button>
-        </div>
-        <% } %>
+        </main>
     </body>
 </html>
